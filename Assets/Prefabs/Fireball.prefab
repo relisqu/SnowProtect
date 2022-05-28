@@ -4905,6 +4905,7 @@ GameObject:
   - component: {fileID: 3701934932257046229}
   - component: {fileID: 3701934932257046230}
   - component: {fileID: 3701934932257046231}
+  - component: {fileID: -5164432196039307559}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -4938,7 +4939,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.5345421}
@@ -4994,7 +4995,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3701934932257046060}
   serializedVersion: 7
-  lengthInSec: 0.32
+  lengthInSec: 0.23
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -5929,7 +5930,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 30
+        scalar: 10
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -5980,8 +5981,8 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
       cycleCount: 1
-      repeatInterval: 0.01
-      probability: 1
+      repeatInterval: 0.03
+      probability: 0.94
   SizeModule:
     enabled: 1
     curve:
@@ -9933,6 +9934,27 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!50 &-5164432196039307559
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3701934932257046060}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3701934933065352089
 GameObject:
   m_ObjectHideFlags: 0

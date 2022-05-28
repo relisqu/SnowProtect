@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Snowball
   - Player
-  - DistortionEffect
+  - 
   - 
   - 
   - 
@@ -38,9 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: DistortionEffect
-    uniqueID: 2587428765
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

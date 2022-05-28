@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using Surfaces;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
@@ -15,7 +16,7 @@ namespace DefaultNamespace
         private bool _isAlive = true;
         private Material _material;
         private float _defaultIntensity;
-
+        private float _lifeStartTime;
         private void Awake()
         {
             _particleSystem = GetComponent<ParticleSystem>();
@@ -24,6 +25,7 @@ namespace DefaultNamespace
             _light2D = GetComponentInChildren<Light2D>();
             _defaultIntensity = _light2D.intensity;
             _material = _particleSystem.GetComponent<ParticleSystemRenderer>().material;
+            _lifeStartTime = Time.time;
             
         }
 
@@ -33,26 +35,32 @@ namespace DefaultNamespace
             gameObject.SetActive(false);
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnCollisionEnter2D(Collision2D other)
         {
             if (!_isAlive) return;
             if (other.gameObject.TryGetComponent(out Snowball ball))
             {
                 ball.AddForce(ball.transform.position - transform.position, 5f);
                 PlayDeathAnimation();
+                CameraShake.ShakeCamera(0.15f, 4f);
             }
-            else if (other.TryGetComponent(out PlayerMovement player))
+            else if (other.gameObject.TryGetComponent(out PlayerMovement player))
             {
                 player.TakeDamage(player.transform.position - transform.position, 2f, 5f);
-
+                CameraShake.ShakeCamera(0.15f, 6f);
+                PlayDeathAnimation();
+            } 
+            if (other.gameObject.TryGetComponent(out Wall _) && Time.time-_lifeStartTime>0.4f)
+            {
                 PlayDeathAnimation();
             }
         }
 
+
         public void ResetParameters()
         {
             _isAlive = true;
-
+            _lifeStartTime = Time.time;
             TrailParticleSystem.Play();
             TrailParticleSystem.enableEmission = true;
             _forwardLinearMovement.Play();
@@ -63,12 +71,12 @@ namespace DefaultNamespace
             StartCoroutine(DieAfterTime());
         }
 
+
         public void PlayDeathAnimation()
         {
             if (!_isAlive) return;
             TrailParticleSystem.Stop();
             TrailParticleSystem.enableEmission = false;
-            CameraShake.ShakeCamera(0.15f, 6f);
             _forwardLinearMovement.Stop();
             _collider.enabled = false;
             _particleSystem.Play();

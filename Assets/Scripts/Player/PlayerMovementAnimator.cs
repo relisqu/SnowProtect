@@ -32,7 +32,7 @@ public class PlayerMovementAnimator : MonoBehaviour
                 var x = Mathf.Clamp01(Math.Abs(direction.x ));
                 var y = Mathf.Sign(direction.y)*Mathf.Clamp01(Math.Abs(direction.y ));
                 
-                _animator.SetBool(IsRunning,magnitude>0.002f); 
+                _animator.SetBool(IsRunning,magnitude>0.001f); 
                 _animator.SetBool(Sliding,IsSliding); 
                 if (Vector2.Dot(transform.position, _previousPosition) < 0.08f || magnitude<0.001f)
                 {
